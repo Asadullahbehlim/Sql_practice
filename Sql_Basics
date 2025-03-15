@@ -1,0 +1,99 @@
+SQL Practice File 
+
+############# ========== ##########
+
+create database college;
+
+use college;
+create table student(
+  rollno int primary key,
+  name varchar(30) not null,
+  marks int not null,
+  grade varchar(1) not null,
+  city varchar(20)
+  
+);
+
+create table dept(
+    id int primary key,
+    name varchar(50)
+    
+);
+
+create table teacher(
+   id int primary key,
+   name varchar(50),
+   dept_id int references dept(id)
+   on update cascade
+   on delete cascade
+);
+
+drop table teacher;
+
+insert into teacher(id,name,dept_id) values(105,"Ashish",105),(106,"mitchell",106) ;
+select * from teacher;
+
+insert into dept(id,name) values(105,"English"),(106,"IT");
+select * from dept;
+
+update dept set id = 104 where id = 105;
+
+
+
+insert into student (rollno, name, marks, grade, city)
+values (101, "karishma", 72, "B", "Pune"),
+(102, "bhumika", 92, "A", "Mumbai"),
+(103, "chetan", 85, "B", "Nasik"),
+(104, "dhruv", 96, "A", "Delhi"),
+(105, "emanuel", 12, "F", "pune");
+
+select * from student where marks>80;
+select * from student where city = "pune";
+select * from student limit 3;
+select * from student order by marks desc limit 3;
+
+select min(marks) as Minimum_Marks from student;
+select count(city) from student;
+
+select city,name, count(rollno) from student
+group by city,name;
+
+select city,avg(marks) from student
+group by city
+order by avg(marks) desc;
+
+SELECT grade, COUNT(rollno) AS student_count 
+FROM student
+WHERE grade = 'A'  -- ✅ Use WHERE for non-aggregated filtering
+GROUP BY grade
+having grade = 'A';
+
+# =========== #
+set sql_safe_updates = 0;
+
+select city from student
+where grade = "A"
+# we cant use where here
+group by city
+having max(marks) > 90;
+
+update student set grade =  "O" where grade = "A";
+
+update student set marks = "73"
+where rollno = 105;
+
+update student set grade = "c"
+where marks between 70 and 80;
+select * from student;
+
+update student set marks = marks + 1;
+
+update student
+set marks = 25 where rollno = 105;
+
+delete from student where marks<33;
+
+########## ============ ############
+
+
+

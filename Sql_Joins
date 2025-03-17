@@ -1,0 +1,36 @@
+# Joins
+
+# To combine multiple data
+
+# Inner join = That have matching records in both tables (Complete Data)
+# Left Join = Return all records from left table and join records from right table. (Jiska Pura Data Chahiye Woh pehle(Right/left))
+# Full Join doesn't exist in mysql, it exist in postgre and other 
+# So we apply left join then right join and make union of both so full data accessed.
+
+create database IPL;  
+use IPL;
+
+create table players(
+   id int primary key not null,
+   name varchar(50)
+);
+
+create table player_roles (
+  id int primary key not null,
+  role varchar(20)
+);
+
+insert into players(id,name) values(102,"kohli"),(134,"cummins");
+
+insert into player_roles (id,role) values(102,"Batsman"),(134,"All-rounder"),(145,"Bowler");
+
+
+select * from players;
+select * from player_roles;
+
+
+select * from players as pl left join player_roles as pr
+on pl.id = pr.id;
+
+
+

@@ -2,6 +2,8 @@ SQL Practice File
 
 ############# ========== ##########
 
+
+
 create database college;
 
 use college;
@@ -86,6 +88,10 @@ update student set grade = "c"
 where marks between 70 and 80;
 select * from student;
 
+
+Alter table stud rename to student;
+
+
 update student set marks = marks + 1;
 
 update student
@@ -93,7 +99,14 @@ set marks = 25 where rollno = 105;
 
 delete from student where marks<33;
 
-########## ============ ############
 
+select avg (marks) from student;
 
+select full_name,marks from student where marks > 92;
 
+# Subquery 
+
+select full_name,marks from student
+where marks > (select avg(marks) from student);
+
+#################################
